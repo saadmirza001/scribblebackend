@@ -29,7 +29,7 @@ urlpatterns = [
     path('api/count/<str:username>/', CountData),
     path('api/likeBlog/<str:username>/<int:blogId>/', LikeBlogbyUser),
     path('api/commentBlog/<str:username>/<int:blogId>/', WriteComment),
-    # path('api/sendPayRequest/<str:username>/', SendPaymentRequest),
+    path('api/sendPayRequest/<str:username>/', SendPaymentRequest),
     path('api/write/', WriteBlog),
     path("", Home)
 ]

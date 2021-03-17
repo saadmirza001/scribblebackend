@@ -10,11 +10,12 @@ from backend.tasks import SendMailTask
 from django.shortcuts import render
 
 
-# import requests
+import requests
 import json
 
-headers = { "X-Api-Key": "36fedc81de23f05b7044ababd27d0555",
-            "X-Auth-Token": "6fb6c5ad36a9baa8a7c734141a9535f3"}
+headers = { "X-Api-Key": "test_310f45ea5b1f1b84a730042e2d9",
+            "X-Auth-Token": "test_b11cc750115375b7ead968f3811"
+            }
 
 
 @api_view(http_method_names=["GET", "POST"])
@@ -231,29 +232,29 @@ def WriteComment(request, username, blogId):
         })
 
 
-# @api_view(http_method_names=["GET", "POST"])
-# def SendPaymentRequest(request, username):
-#     user = User.objects.get(username=username)
-#     donnerName = user.first_name
-#     payloads = {
-#         "purpose": 'Donate Amount..',
-#         'amount': '10',
-#         "buyer_name" : donnerName,
-#         "email" : 'prateek29mishra@gmail.com',
-#         "phone": "9893762256",
-#         "redirect_url":"http://127.0.0.1:3000/paycheck",
-#         'send_email':True,
-#         'send_sms':True
-#     }
-#
-#     response = requests.post("https://www.instamojo.com/api/1.1/payment-requests/", data=payloads, headers=headers)
-#     textResponse = response.text
-#     jsonResponse = json.loads(textResponse)
-#     print(jsonResponse)
-#     paymentUrl = jsonResponse["payment_request"]["longurl"]
-#     return Response (data = {
-#         "payUrl" : paymentUrl
-#     })
+@api_view(http_method_names=["GET", "POST"])
+def SendPaymentRequest(request, username):
+    user = User.objects.get(username=username)
+    donorName = user.first_name
+    payloads = {
+        "purpose": 'Donate Amount..',
+        'amount': '10',
+        "buyer_name" : donorName,
+        "email" : 'scribbleblogs@gmail.com',
+        "phone": "7675074823",
+        "redirect_url":"http://127.0.0.1:3000/paycheck",
+        'send_email':True,
+        'send_sms':True
+    }
+
+    response = requests.post("https://test.instamojo.com/api/1.1/payment-requests/", data=payloads, headers=headers)
+    textResponse = response.text
+    jsonResponse = json.loads(textResponse)
+    print(jsonResponse)
+    paymentUrl = jsonResponse["payment_request"]["longurl"]
+    return Response (data = {
+        "payUrl" : paymentUrl
+    })
 
 
 #pip install celery
